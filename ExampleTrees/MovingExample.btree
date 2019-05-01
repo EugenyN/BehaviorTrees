@@ -1,0 +1,39 @@
+{
+  "BehaviorTree": {
+    "$type": "BehaviorTrees.Sequence, BehaviorTrees",
+    "Step": 0,
+    "Nodes": [
+      {
+        "$type": "BehaviorTrees.Loop, BehaviorTrees",
+        "Count": 3,
+        "Nodes": [
+          {
+            "$type": "BehaviorTrees.Sequence, BehaviorTrees",
+            "Step": 0,
+            "Nodes": [
+              {
+                "$type": "BehaviorTrees.Example1.Move, BehaviorTrees.Example1",
+                "Position": "0, 0"
+              },
+              {
+                "$type": "BehaviorTrees.Example1.Move, BehaviorTrees.Example1",
+                "Position": "20, 0"
+              },
+              {
+                "$type": "BehaviorTrees.Delay, BehaviorTrees",
+                "Seconds": 2.0,
+                "Nodes": [
+                  {
+                    "$type": "BehaviorTrees.Example1.Move, BehaviorTrees.Example1",
+                    "Position": "0, 20"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Name": "MovingExample"
+}
