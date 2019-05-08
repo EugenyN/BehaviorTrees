@@ -22,17 +22,15 @@ You can learn more about Behavior Trees at the following links:
 
 This project demonstrates the concept and working principle of the Behavior Trees. Therefore, I tried to make it as simple and laconic as possible. You can fork, adapt and extend the project to suit your needs.
 
-* The project includes **BehaviorTrees** library (C#, .Net Standart) with the main types of nodes: actions, conditions, composites and decorators (20 in total) as well as auxiliary classes. You can add your nodes inheriting from existing ones. Trees can be serialized in json.
+* The project includes **BehaviorTrees** library (C#, .Net Standart) with the main types of nodes: actions, conditions, composites and decorators (20 in total) as well as auxiliary classes. You can add your nodes by inheriting from existing ones. You can use `ActionBase` base class to create custom actions and use `BaseEvent` base class to create custom events. Trees can be serialized in json.
 
 * **BehaviorTreesEditor** (.Net Framework WinForms) allows you to edit trees with a simple TreeList control, to save, to load and to run trees.
 
-* **BehaviorTrees.Example1** (.Net Standart) contains simple example of the Behavior Tree with custom node "Move".
-
 ![Behavior Trees](/Images/editor.png "Editor")
 
-## Example
+## Example 1
 
-Example of custom node "Move" and tree creation using TreeBuilder:
+* **BehaviorTrees.Example1** (.Net Standart) contains simple example of the Behavior Tree with custom node `Move`:
 
 ```C#
 [DataContract]
@@ -63,7 +61,7 @@ public class Move : Node
     {
         base.OnActivated();
         Log.Write($"{Owner.Name} moving to {Position}");
-        Task.Delay(1000).ContinueWith(_ => completed = true);
+        Task.Delay(1000).ContinueWith(_ => _completed = true);
     }
 
     protected override void OnDeactivated()
@@ -74,31 +72,33 @@ public class Move : Node
 
     protected override ExecutingStatus OnExecuted()
     {
-        return completed ? ExecutingStatus.Success : ExecutingStatus.Running;
-    }
-}
-
-public static class Example1
-{
-    public static void Create()
-    {
-        var exampleBT = new CTreeBuilder<Node>(new Sequence())
-            .AddWithChild(new Loop(3))
-                .AddWithChild(new Sequence())
-                    .Add(new Move(new Point(0, 0)))
-                    .Add(new Move(new Point(20, 0)))
-                    .AddWithChild(new Delay(2))
-                        .Add(new Move(new Point(0, 20)))
-                    .Up()
-                .Up()
-            .Up()
-        .ToTree();
-
-        Engine.Instance.LoadScene(new List<Entity> { new Entity("Actor1") },
-            new BTScript("MovingTest", exampleBT));
+        return _completed ? ExecutingStatus.Success : ExecutingStatus.Running;
     }
 }
 ```
+BehaviorTrees.Example1 demonstrates Behavior Tree creation by using `TreeBuilder`:
+```C#
+
+var exampleBT = new TreeBuilder<Node>(new Sequence())
+    .AddWithChild(new Loop(3))
+        .AddWithChild(new Sequence())
+            .Add(new Move(new Point(0, 0)))
+            .Add(new Move(new Point(20, 0)))
+            .AddWithChild(new Delay(2))
+                .Add(new Move(new Point(0, 20)))
+            .Up()
+        .Up()
+    .Up()
+.ToTree();
+```
+
+## Example 2 - IronPython nodes
+
+The library **BehaviorTrees.IronPython** is an example of scripting language integration into the Behavior Tree. As an example, two nodes are added: `ScriptedAction` and `ScriptedCondition`. The script can be edited both with help of the PropertyGrid and using the special editor implemented in **IronPythonEditor** project.
+
+![Behavior Trees](/Images/ipeditor.png "IronPython nodes")
+
+You can extend the example and add your own API, import your types, both from the host application and from other IronPython scripts. Based on this example you can integrate another scripting language you need.
 
 ## Other BT implementations on the Github: ##
 
@@ -112,6 +112,7 @@ public static class Example1
 * [TreeView with Columns](https://www.codeproject.com/Articles/23746/TreeView-with-Columns) by jkristia 
 * [Generic Tree container](https://www.codeproject.com/Articles/12592/Generic-Tree-T-in-C) by peterchen 
 * Visual Studio 2015 Image Library. [Microsoft Software License Terms](http://download.microsoft.com/download/0/6/0/0607D8EA-9BB7-440B-A36A-A24EB8C9C67E/Visual%20Studio%202015%20Image%20Library%20EULA.docx)
+* [IronPython](https://github.com/IronLanguages/ironpython2/) and [FastColoredTextBox](https://github.com/PavelTorgashov/FastColoredTextBox) in Example 2
 
 ## License
 
