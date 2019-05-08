@@ -1,6 +1,7 @@
 ﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
 
 using System;
+using System.IO;
 using System.Windows.Forms;
 using BehaviorTrees;
 using BehaviorTrees.Collections;
@@ -52,7 +53,7 @@ namespace BehaviorTreesEditor
 
 		private void UpdateCaption(BTScript data)
 		{
-			Text = "Behavior Tree Editor - [ " + data.Name + " ]";
+			Text = "Behavior Tree Editor - [ " + Path.GetFileName(data.FileName) + " ]";
 		}
 	}
 }

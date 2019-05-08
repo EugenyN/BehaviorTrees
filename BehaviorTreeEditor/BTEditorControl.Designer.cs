@@ -31,17 +31,17 @@
             this.executeTSButton = new System.Windows.Forms.ToolStripButton();
             this.stopTSButton = new System.Windows.Forms.ToolStripButton();
             this.entityComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.behaviorTreeTL = new CommonTools.TreeListView();
             this.behaviorTreeImageList = new System.Windows.Forms.ImageList(this.components);
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.behaviorTreeTL = new CommonTools.TreeListView();
             this.behaviorTreeCMS.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.behaviorTreeTL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorTreeTL)).BeginInit();
             this.SuspendLayout();
             // 
             // behaviorTreeCMS
@@ -70,7 +70,7 @@
             this.entityComboBox});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(760, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(809, 25);
             this.toolStrip1.TabIndex = 10;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -146,31 +146,6 @@
             this.entityComboBox.Name = "entityComboBox";
             this.entityComboBox.Size = new System.Drawing.Size(200, 25);
             // 
-            // behaviorTreeTL
-            // 
-            this.behaviorTreeTL.AllowDrop = true;
-            treeListColumn1.AutoSizeMinSize = 0;
-            treeListColumn1.Width = 270;
-            treeListColumn2.AutoSizeMinSize = 0;
-            treeListColumn2.Width = 82;
-            treeListColumn3.AutoSizeMinSize = 0;
-            treeListColumn3.Width = 160;
-            this.behaviorTreeTL.Columns.AddRange(new CommonTools.TreeListColumn[] {
-            treeListColumn1,
-            treeListColumn2,
-            treeListColumn3});
-            this.behaviorTreeTL.ContextMenuStrip = this.behaviorTreeCMS;
-            this.behaviorTreeTL.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.behaviorTreeTL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.behaviorTreeTL.Images = this.behaviorTreeImageList;
-            this.behaviorTreeTL.Location = new System.Drawing.Point(0, 0);
-            this.behaviorTreeTL.Name = "behaviorTreeTL";
-            this.behaviorTreeTL.RowOptions.ItemHeight = 26;
-            this.behaviorTreeTL.Size = new System.Drawing.Size(543, 534);
-            this.behaviorTreeTL.TabIndex = 19;
-            this.behaviorTreeTL.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.BehaviorTreeTL_AfterSelect);
-            this.behaviorTreeTL.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BehaviorTreeTL_MouseUp);
-            // 
             // behaviorTreeImageList
             // 
             this.behaviorTreeImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("behaviorTreeImageList.ImageStream")));
@@ -186,7 +161,7 @@
             this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
             this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(213, 534);
+            this.propertyGrid1.Size = new System.Drawing.Size(227, 526);
             this.propertyGrid1.TabIndex = 20;
             // 
             // splitContainer1
@@ -202,9 +177,34 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGrid1);
-            this.splitContainer1.Size = new System.Drawing.Size(760, 534);
-            this.splitContainer1.SplitterDistance = 543;
+            this.splitContainer1.Size = new System.Drawing.Size(809, 526);
+            this.splitContainer1.SplitterDistance = 578;
             this.splitContainer1.TabIndex = 21;
+            // 
+            // behaviorTreeTL
+            // 
+            this.behaviorTreeTL.AllowDrop = true;
+            treeListColumn1.AutoSizeMinSize = 0;
+            treeListColumn1.Width = 270;
+            treeListColumn2.AutoSizeMinSize = 0;
+            treeListColumn2.Width = 90;
+            treeListColumn3.AutoSizeMinSize = 0;
+            treeListColumn3.Width = 150;
+            this.behaviorTreeTL.Columns.AddRange(new CommonTools.TreeListColumn[] {
+            treeListColumn1,
+            treeListColumn2,
+            treeListColumn3});
+            this.behaviorTreeTL.ContextMenuStrip = this.behaviorTreeCMS;
+            this.behaviorTreeTL.Cursor = System.Windows.Forms.Cursors.VSplit;
+            this.behaviorTreeTL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.behaviorTreeTL.Images = this.behaviorTreeImageList;
+            this.behaviorTreeTL.Location = new System.Drawing.Point(0, 0);
+            this.behaviorTreeTL.Name = "behaviorTreeTL";
+            this.behaviorTreeTL.RowOptions.ItemHeight = 26;
+            this.behaviorTreeTL.Size = new System.Drawing.Size(578, 526);
+            this.behaviorTreeTL.TabIndex = 19;
+            this.behaviorTreeTL.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.BehaviorTreeTL_AfterSelect);
+            this.behaviorTreeTL.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BehaviorTreeTL_MouseUp);
             // 
             // BTEditorControl
             // 
@@ -212,15 +212,15 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "BTEditorControl";
-            this.Size = new System.Drawing.Size(760, 559);
+            this.Size = new System.Drawing.Size(809, 551);
             this.behaviorTreeCMS.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.behaviorTreeTL)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorTreeTL)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

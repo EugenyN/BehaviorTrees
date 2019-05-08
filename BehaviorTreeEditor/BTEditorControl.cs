@@ -82,7 +82,7 @@ namespace BehaviorTreesEditor
 		public void LoadEmpty()
 		{
 			_engine.LoadScene(new List<Entity> { new Entity("Actor1") },
-				new BTScript("New Script", new Sequence()));
+				new BTScript("New Script.btree", new Sequence()));
 		}
 
 		private void UnloadData()
@@ -108,7 +108,7 @@ namespace BehaviorTreesEditor
 		private void ShowSaveFileDialog()
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
-			saveFileDialog.FileName = _script.Name + ".btree";
+			saveFileDialog.FileName = Path.GetFileNameWithoutExtension(_script.FileName) + ".btree";
 			saveFileDialog.Filter = "BT Scripts (*.btree)|*.btree|All files (*.*)|*.*";
 
 			if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -135,7 +135,7 @@ namespace BehaviorTreesEditor
 			if (!_script.Saved)
 				ShowSaveFileDialog();
 			else
-				_script.Save(_script.Name + ".btree");
+				_script.Save(_script.FileName);
 		}
 
 		private void SaveAsTSButton_Click(object sender, EventArgs e)

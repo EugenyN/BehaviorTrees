@@ -103,13 +103,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BehaviorTrees.Example1\BehaviorTrees.Example1.csproj">
-      <Project>{1ce2bb7d-324d-4177-b01b-94b95f4c7826}</Project>
-      <Name>BehaviorTrees.Example1</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BehaviorTrees\BehaviorTrees.csproj">
       <Project>{7379ea56-d19d-4827-a614-bf969c493212}</Project>
       <Name>BehaviorTrees</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Example1\BehaviorTrees.Example1.csproj">
+      <Project>{56b59ab1-3909-4bae-817c-3a0806cea730}</Project>
+      <Name>BehaviorTrees.Example1</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

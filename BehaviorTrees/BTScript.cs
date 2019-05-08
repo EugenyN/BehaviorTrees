@@ -14,13 +14,13 @@ namespace BehaviorTrees
 	{
 		[DataMember]
 		public Node		BehaviorTree { get; private set; }
-		public string	Name { get; set; }
+		public string	FileName { get; set; }
 		public bool		Saved { get; set; }
 
-		public BTScript(string name, Node behaviorTree)
+		public BTScript(string fileName, Node behaviorTree)
 		{
 			BehaviorTree = behaviorTree;
-			Name = name;
+			FileName = fileName;
 		}
 
 		public void Save(string fileName)
@@ -37,7 +37,7 @@ namespace BehaviorTrees
 				serializer.Serialize(file, this);
 			}
 
-			Name = Path.GetFileNameWithoutExtension(fileName);
+			FileName = fileName;
 			Saved = true;
 		}
 
@@ -49,7 +49,7 @@ namespace BehaviorTrees
 				serializer.TypeNameHandling = TypeNameHandling.Auto;
 				var script = (BTScript)serializer.Deserialize(file, typeof(BTScript));
 				script.Saved = true;
-				script.Name = Path.GetFileNameWithoutExtension(fileName);
+				script.FileName = fileName;
 				return script;
 			}
 		}
