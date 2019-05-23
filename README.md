@@ -8,7 +8,7 @@ A simple C# example of Behavior Trees + Editor.
 
 <img align="right" src="/Images/bt.png">
 
-They have been widely used in robotics and gaming since mid 2000, in particular, such game engines as Unreal, Unity, CryEngine use BT. BT have several advantages over FSM, such as *Maintainability* (nodes (or subtrees) can be designed independent from each other and can be independent changed), *Scalability* (complex BT can be decomposed into small sub-trees), *Reusability* (subtrees can be used as independent nodes)
+They have been widely used in robotics and gaming since mid 2000, in particular, such game engines as Unreal, Unity, CryEngine use BT. BT have several advantages over [FSM](https://en.wikipedia.org/wiki/Finite-state_machine), such as *Maintainability* (nodes (or subtrees) can be designed independent from each other and can be independent changed), *Scalability* (complex BT can be decomposed into small sub-trees), *Reusability* (subtrees can be used as independent nodes)
 
 You can learn more about Behavior Trees at the following links:
 
@@ -22,7 +22,7 @@ You can learn more about Behavior Trees at the following links:
 
 This project demonstrates the concept and working principle of the Behavior Trees. Therefore, I tried to make it as simple and laconic as possible. You can fork, adapt and extend the project to suit your needs.
 
-* The project includes **BehaviorTrees** library (C#, .Net Standart) with the main types of nodes: actions, conditions, composites and decorators (20 in total) as well as auxiliary classes. You can add your nodes by inheriting from existing ones. You can use `ActionBase` base class to create custom actions and use `BaseEvent` base class to create custom events. Trees can be serialized in json.
+* The project includes **BehaviorTrees** library (C#, .Net Standard) with the main types of nodes: actions, conditions, composites and decorators (20 in total) as well as auxiliary classes. You can add your nodes by inheriting from existing ones. You can use `ActionBase` base class to create custom actions and use `BaseEvent` base class to create custom events. Trees can be serialized in json.
 
 * **BehaviorTreesEditor** (.Net Framework WinForms) allows you to edit trees with a simple TreeList control, to save, to load and to run trees.
 
@@ -30,7 +30,7 @@ This project demonstrates the concept and working principle of the Behavior Tree
 
 ## Example 1
 
-* **BehaviorTrees.Example1** (.Net Standart) contains simple example of the Behavior Tree with custom node `Move`:
+* **BehaviorTrees.Example1** (.Net Standard) contains simple example of the Behavior Tree with custom node `Move`:
 
 ```C#
 [DataContract]
