@@ -1,10 +1,8 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
+using BehaviorTrees.Utils;
 using System.Drawing;
 using System.Runtime.Serialization;
-using System.Threading.Tasks;
-using BehaviorTrees.Utils;
 
 namespace BehaviorTrees.Example1
 {
@@ -19,7 +17,8 @@ namespace BehaviorTrees.Example1
 		public Point Position
 		{
 			get { return _position; }
-			set {
+			set
+			{
 				_position = value;
 				Root.SendValueChanged(this);
 			}

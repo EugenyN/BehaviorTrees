@@ -1,8 +1,4 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
-
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
 namespace BehaviorTrees
 {
@@ -12,9 +8,9 @@ namespace BehaviorTrees
 	[AttributeUsage(AttributeTargets.Class)]
 	public class BTNodeAttribute : Attribute
 	{
-		public string	Name { get; set; }
-		public string	Type { get; set; }
-		public bool		ShowInEditor { get; set; }
+		public string Name { get; set; }
+		public string Type { get; set; }
+		public bool ShowInEditor { get; set; }
 
 		public BTNodeAttribute(string name, string type, bool showInEditor)
 		{

@@ -1,7 +1,7 @@
-// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System.Runtime.Serialization;
 using BehaviorTrees.Engine;
+using System.Runtime.Serialization;
 
 namespace BehaviorTrees
 {
@@ -18,7 +18,8 @@ namespace BehaviorTrees
 		public ActionBase Action
 		{
 			get { return _action; }
-			set {
+			set
+			{
 				if (_action == value)
 					return;
 
@@ -33,7 +34,8 @@ namespace BehaviorTrees
 
 		public override string NodeParameters
 		{
-			get {
+			get
+			{
 				if (Action != null)
 					return Action.ToString();
 				else

@@ -1,14 +1,11 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
 using BehaviorTrees.Engine;
 using BehaviorTrees.Utils;
 using IronPython.Runtime;
 using IronPython.Runtime.Types;
 using Microsoft.Scripting.Hosting;
+using System.Runtime.Serialization;
 
 namespace BehaviorTrees.IronPython
 {
@@ -39,12 +36,13 @@ namespace BehaviorTrees.IronPython
 			var objectType = _pi.GetVariable("_TempObj");
 			_object = _ops.Invoke(objectType);
 		}
-		
+
 		public PythonObject(string type, params object[] parameters)
 		{
-			if (!_pi.ContainsVariable(type)) {
+			if (!_pi.ContainsVariable(type))
+			{
 				Log.Write("PythonObject constructor:  Type '" + type + "' is not found !");
-				return;				
+				return;
 			}
 
 			var objectType = _pi.GetVariable(type);
@@ -59,7 +57,8 @@ namespace BehaviorTrees.IronPython
 
 		public object AddFunction(string name, string body, List<FnArgDesc> args, bool returnValue)
 		{
-			return AddFunction(new FnDesc() {
+			return AddFunction(new FnDesc()
+			{
 				Name = name,
 				Body = body,
 				Arguments = args,

@@ -1,8 +1,5 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.Text;
 
 
@@ -32,10 +29,10 @@ namespace BehaviorTrees.IronPython
 	/// </summary>
 	public struct FnDesc
 	{
-		public string			Name;
-		public string			Body;
-		public List<FnArgDesc>	Arguments;
-		public bool				IsReturn;
+		public string Name;
+		public string Body;
+		public List<FnArgDesc> Arguments;
+		public bool IsReturn;
 
 		public FnDesc(string name, string body, List<FnArgDesc> args, bool isReturn)
 		{
@@ -73,7 +70,8 @@ namespace BehaviorTrees.IronPython
 
 			var result = new StringBuilder();
 
-			for (int i = 0; i < args.Count; i++) {
+			for (int i = 0; i < args.Count; i++)
+			{
 				result.Append(args[i].Name);
 				if (!string.IsNullOrEmpty(args[i].Value))
 					result.AppendFormat(" = {0}", args[i].Value);

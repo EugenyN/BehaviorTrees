@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.156
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorTrees", "BehaviorTrees\BehaviorTrees.csproj", "{7379EA56-D19D-4827-A614-BF969C493212}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTreesEditor", "BehaviorTreeEditor\BehaviorTreesEditor.csproj", "{562E65D4-934F-49C8-B1C2-020C79F9B92A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorTreesEditor", "BehaviorTreeEditor\BehaviorTreesEditor.csproj", "{562E65D4-934F-49C8-B1C2-020C79F9B92A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DC8EDE13-540E-4516-9A20-D734CC57A079} = {DC8EDE13-540E-4516-9A20-D734CC57A079}
 		{B9F3E458-134F-469F-9F50-B8EB11F2FF11} = {B9F3E458-134F-469F-9F50-B8EB11F2FF11}
@@ -18,9 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorTrees.Example1", "E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example2", "Example2", "{F58C6BF4-B10D-4910-8A75-232C839B6BB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTrees.IronPython", "Example2\BehaviorTrees.IronPython\BehaviorTrees.IronPython.csproj", "{DC8EDE13-540E-4516-9A20-D734CC57A079}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorTrees.IronPython", "Example2\BehaviorTrees.IronPython\BehaviorTrees.IronPython.csproj", "{DC8EDE13-540E-4516-9A20-D734CC57A079}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronPythonEditor", "Example2\IronPythonEditor\IronPythonEditor.csproj", "{B9F3E458-134F-469F-9F50-B8EB11F2FF11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorTrees.IronPython.Editor", "Example2\BehaviorTrees.IronPython.Editor\BehaviorTrees.IronPython.Editor.csproj", "{B9F3E458-134F-469F-9F50-B8EB11F2FF11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

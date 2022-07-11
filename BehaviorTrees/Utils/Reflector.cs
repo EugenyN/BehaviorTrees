@@ -1,10 +1,6 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 
 namespace BehaviorTrees.Utils
@@ -14,9 +10,10 @@ namespace BehaviorTrees.Utils
 		public static IEnumerable<Type> GetAllDerivedTypes(Type baseType, bool classOnly)
 		{
 			string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
 			foreach (string dll in Directory.GetFiles(path, "*.dll"))
 			{
-				var types = GetAllDerivedTypes(Assembly.LoadFile(dll), baseType, classOnly);
+				var types = GetAllDerivedTypes(Assembly.LoadFrom(dll), baseType, classOnly);
 				foreach (var type in types)
 					yield return type;
 			}
@@ -24,19 +21,14 @@ namespace BehaviorTrees.Utils
 
 		public static IEnumerable<Type> GetAllDerivedTypes(Assembly assembly, Type baseType, bool classOnly)
 		{
-			foreach (var ti in assembly.DefinedTypes)
+			foreach (var ti in assembly.GetExportedTypes())
 			{
 				if (classOnly && !ti.IsClass)
 					continue;
 
-				if (baseType.GetTypeInfo().IsAssignableFrom(ti))
-					yield return ti.AsType();
+				if (baseType.IsAssignableFrom(ti))
+					yield return ti;
 			}
-		}
-
-		public static T GetAttribute<T>(Type type) where T : Attribute
-		{
-			return type.GetTypeInfo().GetCustomAttribute<T>();
 		}
 
 		static JsonSerializerSettings _serializerSettings;

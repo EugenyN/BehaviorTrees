@@ -1,14 +1,11 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.Scripting.Hosting;
-using Microsoft.Scripting;
-using IronPython.Runtime;
-using System.Reflection;
-using IronPython.Runtime.Operations;
 using BehaviorTrees.Utils;
+using IronPython.Runtime;
+using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
+using Microsoft.Scripting.Hosting;
+using System.Diagnostics;
 
 namespace BehaviorTrees.IronPython
 {
@@ -54,7 +51,9 @@ namespace BehaviorTrees.IronPython
 			try
 			{
 				return source.Execute(_scope);
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				var wrapper = new Exception(_pi.FormatException(ex), ex);
 				Log.Write(wrapper, "Execute failed: '{0}'", wrapper.Message);
 				throw wrapper;
@@ -66,7 +65,9 @@ namespace BehaviorTrees.IronPython
 			try
 			{
 				return PythonCalls.Call(function, args);
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				Log.Write(ex, "Call function failed: '{0}'", ex.Message);
 				throw new Exception(_pi.FormatException(ex), ex);
 			}
@@ -118,7 +119,8 @@ namespace BehaviorTrees.IronPython
 		{
 			var vars = new Dictionary<string, object>();
 
-			foreach (var item in _scope.GetItems()) {
+			foreach (var item in _scope.GetItems())
+			{
 				Type type = item.Value.GetType();
 				bool sysKey = item.Key.StartsWith("__");
 				if (type.IsPrimitive || type == typeof(string) && !sysKey)

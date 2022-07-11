@@ -1,14 +1,11 @@
-// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.IO;
+using BehaviorTrees.Utils;
+using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
-using Microsoft.Scripting.Hosting;
-using IronPython.Hosting;
-using BehaviorTrees.Utils;
 
 namespace BehaviorTrees.IronPython
 {
@@ -23,7 +20,8 @@ namespace BehaviorTrees.IronPython
 		{
 			get
 			{
-				if (_instance == null) {
+				if (_instance == null)
+				{
 					_instance = new PythonInterpreter();
 					_instance.Initialization();
 				}
@@ -31,11 +29,11 @@ namespace BehaviorTrees.IronPython
 			}
 		}
 
-		readonly ScriptEngine		_engine;
-		readonly ObjectOperations	_operations;
-		Scope						_defaultScope;
-		MemoryStream				_output;
-		ASCIIEncoding				_textEncoder;
+		readonly ScriptEngine _engine;
+		readonly ObjectOperations _operations;
+		Scope _defaultScope;
+		MemoryStream _output;
+		ASCIIEncoding _textEncoder;
 
 		public ScriptEngine Engine
 		{
@@ -58,7 +56,7 @@ namespace BehaviorTrees.IronPython
 		}
 
 		private PythonInterpreter()
-        {
+		{
 			Log.Write("Interpreter initialization...");
 
 			_engine = CreateEngine();
@@ -69,7 +67,7 @@ namespace BehaviorTrees.IronPython
 
 			_defaultScope = new Scope(_engine.CreateScope(), this);
 			_operations = _defaultScope.CreateOperations();
-        }
+		}
 
 		private void Initialization()
 		{
@@ -89,7 +87,7 @@ namespace BehaviorTrees.IronPython
 			Log.Write("Interpreter initialization completed.");
 		}
 
-		private ScriptEngine CreateEngine()
+		private static ScriptEngine CreateEngine()
 		{
 			var setup = new ScriptRuntimeSetup();
 			setup.LanguageSetups.Add(Python.CreateLanguageSetup(null));
@@ -263,15 +261,21 @@ namespace BehaviorTrees.IronPython
 			if (scopeVars.Count == 0)
 				return;
 
-			using (var fs = new FileStream(fileName, FileMode.Create)) {
-				using (var xmlWriter = new XmlTextWriter(fs, System.Text.Encoding.UTF8)) {
+			using (var fs = new FileStream(fileName, FileMode.Create))
+			{
+				using (var xmlWriter = new XmlTextWriter(fs, System.Text.Encoding.UTF8))
+				{
 					xmlWriter.Formatting = Formatting.Indented;
-					using (var writer = XmlDictionaryWriter.CreateDictionaryWriter(xmlWriter)) {
+					using (var writer = XmlDictionaryWriter.CreateDictionaryWriter(xmlWriter))
+					{
 						var serializer = new DataContractSerializer(typeof(Dictionary<string, object>));
 
-						try {
+						try
+						{
 							serializer.WriteObject(writer, scopeVars);
-						} catch (Exception ex) {
+						}
+						catch (Exception ex)
+						{
 							Log.Write(ex);
 						}
 					}
@@ -281,13 +285,18 @@ namespace BehaviorTrees.IronPython
 
 		public void LoadScopeVariables(string fileName)
 		{
-			using (var fs = new FileStream(fileName, FileMode.Open)) {
-				using (var reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas())) {
+			using (var fs = new FileStream(fileName, FileMode.Open))
+			{
+				using (var reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas()))
+				{
 					var serializer = new DataContractSerializer(typeof(Dictionary<string, object>));
 
-					try {
+					try
+					{
 						SetScopeVariables((Dictionary<string, object>)serializer.ReadObject(reader));
-					} catch (Exception ex) {
+					}
+					catch (Exception ex)
+					{
 						Log.Write(ex);
 					}
 				}

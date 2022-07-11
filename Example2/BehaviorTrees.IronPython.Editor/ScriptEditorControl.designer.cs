@@ -1,4 +1,4 @@
-﻿namespace IronPythonEditor
+﻿namespace BehaviorTrees.IronPython.Editor
 {
 	partial class ScriptEditorControl
 	{
@@ -27,6 +27,8 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.saveTSButton = new System.Windows.Forms.ToolStripSplitButton();
+            this.saveAndCloseTSButton = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cutTSButton = new System.Windows.Forms.ToolStripButton();
             this.copyTSButton = new System.Windows.Forms.ToolStripButton();
@@ -39,8 +41,6 @@
             this.outputTextBox = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pythonTextbox = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.saveTSButton = new System.Windows.Forms.ToolStripSplitButton();
-            this.saveAndCloseTSButton = new System.Windows.Forms.ToolStripMenuItem();
             this.codeEditorCMS.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -135,6 +135,27 @@
             this.toolStrip1.TabIndex = 10;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // saveTSButton
+            // 
+            this.saveTSButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveTSButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveAndCloseTSButton});
+            this.saveTSButton.Image = ((System.Drawing.Image)(resources.GetObject("saveTSButton.Image")));
+            this.saveTSButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveTSButton.Name = "saveTSButton";
+            this.saveTSButton.Size = new System.Drawing.Size(32, 22);
+            this.saveTSButton.Text = "Save";
+            this.saveTSButton.ToolTipText = "Save script";
+            this.saveTSButton.Click += new System.EventHandler(this.SaveTSButton_Click);
+            // 
+            // saveAndCloseTSButton
+            // 
+            this.saveAndCloseTSButton.Image = ((System.Drawing.Image)(resources.GetObject("saveAndCloseTSButton.Image")));
+            this.saveAndCloseTSButton.Name = "saveAndCloseTSButton";
+            this.saveAndCloseTSButton.Size = new System.Drawing.Size(180, 22);
+            this.saveAndCloseTSButton.Text = "Save and Close";
+            this.saveAndCloseTSButton.Click += new System.EventHandler(this.SaveAndCloseTSButton_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -221,7 +242,7 @@
             this.outputTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.outputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.outputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outputTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outputTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.outputTextBox.Location = new System.Drawing.Point(0, 0);
             this.outputTextBox.Multiline = true;
             this.outputTextBox.Name = "outputTextBox";
@@ -262,19 +283,25 @@
         '\"',
         '\'',
         '\''};
+            this.pythonTextbox.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*" +
+    "(?<range>:)\\s*(?<range>[^;]+);";
             this.pythonTextbox.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.pythonTextbox.BackBrush = null;
             this.pythonTextbox.CharHeight = 14;
             this.pythonTextbox.CharWidth = 8;
             this.pythonTextbox.ContextMenuStrip = this.codeEditorCMS;
             this.pythonTextbox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.pythonTextbox.DefaultMarkerSize = 8;
             this.pythonTextbox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.pythonTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pythonTextbox.Font = new System.Drawing.Font("Courier New", 9.75F);
+            this.pythonTextbox.FindForm = null;
+            this.pythonTextbox.GoToForm = null;
+            this.pythonTextbox.Hotkeys = resources.GetString("pythonTextbox.Hotkeys");
             this.pythonTextbox.IsReplaceMode = false;
             this.pythonTextbox.Location = new System.Drawing.Point(0, 0);
             this.pythonTextbox.Name = "pythonTextbox";
             this.pythonTextbox.Paddings = new System.Windows.Forms.Padding(0);
+            this.pythonTextbox.ReplaceForm = null;
             this.pythonTextbox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.pythonTextbox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("pythonTextbox.ServiceColors")));
             this.pythonTextbox.Size = new System.Drawing.Size(649, 186);
@@ -282,27 +309,6 @@
             this.pythonTextbox.Zoom = 100;
             this.pythonTextbox.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.PythonTextbox_TextChanged);
             this.pythonTextbox.AutoIndentNeeded += new System.EventHandler<FastColoredTextBoxNS.AutoIndentEventArgs>(this.PythonTextbox_AutoIndentNeeded);
-            // 
-            // saveTSButton
-            // 
-            this.saveTSButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveTSButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveAndCloseTSButton});
-            this.saveTSButton.Image = ((System.Drawing.Image)(resources.GetObject("saveTSButton.Image")));
-            this.saveTSButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveTSButton.Name = "saveTSButton";
-            this.saveTSButton.Size = new System.Drawing.Size(32, 22);
-            this.saveTSButton.Text = "Save";
-            this.saveTSButton.ToolTipText = "Save script";
-            this.saveTSButton.Click += new System.EventHandler(this.SaveTSButton_Click);
-            // 
-            // saveAndCloseTSButton
-            // 
-            this.saveAndCloseTSButton.Image = ((System.Drawing.Image)(resources.GetObject("saveAndCloseTSButton.Image")));
-            this.saveAndCloseTSButton.Name = "saveAndCloseTSButton";
-            this.saveAndCloseTSButton.Size = new System.Drawing.Size(180, 22);
-            this.saveAndCloseTSButton.Text = "Save and Close";
-            this.saveAndCloseTSButton.Click += new System.EventHandler(this.SaveAndCloseTSButton_Click);
             // 
             // ScriptEditorControl
             // 

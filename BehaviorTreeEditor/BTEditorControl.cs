@@ -1,20 +1,14 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
 using BehaviorTrees;
-using BehaviorTrees.Utils;
 using BehaviorTrees.Engine;
-
+using BehaviorTrees.Utils;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace BehaviorTreesEditor
 {
@@ -30,11 +24,11 @@ namespace BehaviorTreesEditor
 			_nodeTypes = new List<Type>(GetNodeTypes());
 		}
 
-		Engine _engine = Engine.Instance;
+		readonly Engine _engine = Engine.Instance;
 
 		BTScript _script;
 		TreeListController<Node> _controller;
-		List<Type> _nodeTypes;
+		readonly List<Type> _nodeTypes;
 
 		public BTScript Script
 		{
@@ -82,7 +76,7 @@ namespace BehaviorTreesEditor
 		public void LoadEmpty()
 		{
 			_engine.LoadScene(new List<Entity> { new Entity("Actor1") },
-				new BTScript("New Script.btree", new Sequence()));
+				new BTScript("New Script", new Sequence()));
 		}
 
 		private void UnloadData()
@@ -286,7 +280,7 @@ namespace BehaviorTreesEditor
 				viewNode.ExpandAll();
 		}
 
-		private ToolStripItemCollection GetMenuItem(ToolStripItemCollection items, string itemName)
+		private static ToolStripItemCollection GetMenuItem(ToolStripItemCollection items, string itemName)
 		{
 			foreach (ToolStripMenuItem item in items)
 			{
@@ -302,7 +296,7 @@ namespace BehaviorTreesEditor
 			return AddMenuItem(behaviorTreeCMS.Items, name, type, action);
 		}
 
-		private ToolStripItemCollection AddMenuItem(
+		private static ToolStripItemCollection AddMenuItem(
 			ToolStripItemCollection items, string name, Type type, Action<Type> action)
 		{
 			var menuItem = new ToolStripMenuItem(name);
@@ -319,11 +313,11 @@ namespace BehaviorTreesEditor
 			return menuItem.DropDownItems;
 		}
 
-		private IEnumerable<Type> GetNodeTypes()
+		private static IEnumerable<Type> GetNodeTypes()
 		{
 			foreach (var type in Reflector.GetAllDerivedTypes(typeof(Node), true))
 			{
-				var attr = Reflector.GetAttribute<BTNodeAttribute>(type);
+				var attr = type.GetCustomAttribute<BTNodeAttribute>();
 				if (attr != null && attr.ShowInEditor)
 					yield return type;
 			}

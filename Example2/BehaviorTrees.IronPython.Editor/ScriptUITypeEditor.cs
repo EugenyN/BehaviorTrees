@@ -1,12 +1,13 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
 
-namespace BehaviorTrees.IronPython.Design
+namespace BehaviorTrees.IronPython.Editor
 {
-
 	/// <summary>
 	/// 
 	/// </summary>
@@ -30,17 +31,20 @@ namespace BehaviorTrees.IronPython.Design
 			if (context == null || context.Instance == null || provider == null)
 				return value;
 
+			var edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
+			if (edSvc == null)
+				return null;
+
 			string text = (string)Convert.ChangeType(value, context.PropertyDescriptor.PropertyType);
 
-			// dependency inversion
-			var scriptEditorService = MefComposer.GetExportedValue<IScriptEditorService>();
-			if (scriptEditorService != null) {
-				var script = new PythonScript(text);
-				scriptEditorService.ShowEditor(script, context);
-				return script.Text;
+			var script = new PythonScript(text);
+			using (var form = new ScriptEditorForm(script))
+			{
+				if (edSvc.ShowDialog(form) == DialogResult.OK)
+					return script.Text;
 			}
 
-			return text;
+			return value;
 		}
 	}
 }

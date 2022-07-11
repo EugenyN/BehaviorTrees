@@ -1,7 +1,6 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
 using Newtonsoft.Json;
-using System.IO;
 using System.Runtime.Serialization;
 
 namespace BehaviorTrees
@@ -13,21 +12,21 @@ namespace BehaviorTrees
 	public class BTScript
 	{
 		[DataMember]
-		public Node		BehaviorTree { get; private set; }
-		public string	FileName { get; set; }
-		public bool		Saved { get; set; }
+		public Node BehaviorTree { get; private set; }
+		public string FileName { get; set; }
+		public bool Saved { get; set; }
 
-		public BTScript(string fileName, Node behaviorTree)
+		public BTScript(string name, Node behaviorTree)
 		{
 			BehaviorTree = behaviorTree;
-			FileName = fileName;
+			FileName = name;
 		}
 
 		public void Save(string fileName)
 		{
-			using (StreamWriter file = File.CreateText(fileName))
+			using (var file = File.CreateText(fileName))
 			{
-				JsonSerializer serializer = JsonSerializer.Create(new JsonSerializerSettings
+				var serializer = JsonSerializer.Create(new JsonSerializerSettings
 				{
 					TypeNameHandling = TypeNameHandling.Auto,
 					ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
@@ -43,9 +42,9 @@ namespace BehaviorTrees
 
 		public static BTScript Load(string fileName)
 		{
-			using (StreamReader file = File.OpenText(fileName))
+			using (var file = File.OpenText(fileName))
 			{
-				JsonSerializer serializer = new JsonSerializer();
+				var serializer = new JsonSerializer();
 				serializer.TypeNameHandling = TypeNameHandling.Auto;
 				var script = (BTScript)serializer.Deserialize(file, typeof(BTScript));
 				script.Saved = true;

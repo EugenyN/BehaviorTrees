@@ -1,7 +1,5 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System.Collections.Generic;
-using System;
 using BehaviorTrees.Utils;
 
 namespace BehaviorTrees.Engine
@@ -24,7 +22,7 @@ namespace BehaviorTrees.Engine
 	/// </summary>
 	public class EventManager
 	{
-		Dictionary<string, Type> _eventTypeByID = new Dictionary<string, Type>();
+		readonly Dictionary<string, Type> _eventTypeByID = new Dictionary<string, Type>();
 
 		static EventManager _instance;
 
@@ -32,7 +30,8 @@ namespace BehaviorTrees.Engine
 
 		public static EventManager Instance
 		{
-			get {
+			get
+			{
 				if (_instance == null)
 					_instance = new EventManager();
 				return _instance;
@@ -71,8 +70,7 @@ namespace BehaviorTrees.Engine
 
 		public BaseEvent CreateEvent(string eventTypeID, params object[] args)
 		{
-			Type eventType;
-			if (GetEventType(eventTypeID, out eventType))
+			if (GetEventType(eventTypeID, out var eventType))
 				return Activator.CreateInstance(eventType, args) as BaseEvent;
 
 			return null;

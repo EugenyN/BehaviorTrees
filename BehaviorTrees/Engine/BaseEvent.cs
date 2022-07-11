@@ -1,4 +1,4 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
 using System.ComponentModel;
 using System.Runtime.Serialization;
@@ -17,7 +17,8 @@ namespace BehaviorTrees.Engine
 		public IScriptedContext ScriptedContext
 		{
 			get { return _scriptedContext; }
-			set {
+			set
+			{
 				if (_scriptedContext == value)
 					return;
 

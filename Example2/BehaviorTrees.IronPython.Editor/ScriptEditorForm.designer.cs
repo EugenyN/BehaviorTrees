@@ -1,4 +1,4 @@
-﻿namespace IronPythonEditor
+﻿namespace BehaviorTrees.IronPython.Editor
 {
 	partial class ScriptEditorForm
 	{
@@ -15,22 +15,22 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.scriptEditorControl = new IronPythonEditor.ScriptEditorControl();
+            this.scriptEditorControl = new BehaviorTrees.IronPython.Editor.ScriptEditorControl();
             this.SuspendLayout();
             // 
             // scriptEditorControl
             // 
-            this.scriptEditorControl.Script = null;
             this.scriptEditorControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scriptEditorControl.Location = new System.Drawing.Point(0, 0);
             this.scriptEditorControl.Name = "scriptEditorControl";
-            this.scriptEditorControl.Size = new System.Drawing.Size(605, 325);
+            this.scriptEditorControl.Script = null;
+            this.scriptEditorControl.Size = new System.Drawing.Size(604, 325);
             this.scriptEditorControl.TabIndex = 0;
             // 
             // ScriptEditorForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(605, 325);
+            this.ClientSize = new System.Drawing.Size(604, 325);
             this.Controls.Add(this.scriptEditorControl);
             this.KeyPreview = true;
             this.Name = "ScriptEditorForm";

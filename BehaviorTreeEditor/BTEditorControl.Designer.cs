@@ -17,9 +17,9 @@
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BTEditorControl));
-            CommonTools.TreeListColumn treeListColumn1 = new CommonTools.TreeListColumn("Name", "Name");
-            CommonTools.TreeListColumn treeListColumn2 = new CommonTools.TreeListColumn("Type", "Type");
-            CommonTools.TreeListColumn treeListColumn3 = new CommonTools.TreeListColumn("Parameters", "Parameters");
+            CommonTools.TreeListColumn treeListColumn4 = new CommonTools.TreeListColumn("Name", "Name");
+            CommonTools.TreeListColumn treeListColumn5 = new CommonTools.TreeListColumn("Type", "Type");
+            CommonTools.TreeListColumn treeListColumn6 = new CommonTools.TreeListColumn("Parameters", "Parameters");
             this.behaviorTreeCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -49,12 +49,12 @@
             this.behaviorTreeCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.executeToolStripMenuItem});
             this.behaviorTreeCMS.Name = "btEditorCMS";
-            this.behaviorTreeCMS.Size = new System.Drawing.Size(115, 26);
+            this.behaviorTreeCMS.Size = new System.Drawing.Size(116, 26);
             // 
             // executeToolStripMenuItem
             // 
             this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
-            this.executeToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.executeToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.executeToolStripMenuItem.Text = "Execute";
             this.executeToolStripMenuItem.Click += new System.EventHandler(this.ExecuteToolStripMenuItem_Click);
             // 
@@ -148,6 +148,7 @@
             // 
             // behaviorTreeImageList
             // 
+            this.behaviorTreeImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.behaviorTreeImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("behaviorTreeImageList.ImageStream")));
             this.behaviorTreeImageList.TransparentColor = System.Drawing.Color.Transparent;
             this.behaviorTreeImageList.Images.SetKeyName(0, "action.png");
@@ -184,16 +185,16 @@
             // behaviorTreeTL
             // 
             this.behaviorTreeTL.AllowDrop = true;
-            treeListColumn1.AutoSizeMinSize = 0;
-            treeListColumn1.Width = 270;
-            treeListColumn2.AutoSizeMinSize = 0;
-            treeListColumn2.Width = 90;
-            treeListColumn3.AutoSizeMinSize = 0;
-            treeListColumn3.Width = 150;
+            treeListColumn4.AutoSizeMinSize = 0;
+            treeListColumn4.Width = 270;
+            treeListColumn5.AutoSizeMinSize = 0;
+            treeListColumn5.Width = 90;
+            treeListColumn6.AutoSizeMinSize = 0;
+            treeListColumn6.Width = 150;
             this.behaviorTreeTL.Columns.AddRange(new CommonTools.TreeListColumn[] {
-            treeListColumn1,
-            treeListColumn2,
-            treeListColumn3});
+            treeListColumn4,
+            treeListColumn5,
+            treeListColumn6});
             this.behaviorTreeTL.ContextMenuStrip = this.behaviorTreeCMS;
             this.behaviorTreeTL.Cursor = System.Windows.Forms.Cursors.VSplit;
             this.behaviorTreeTL.Dock = System.Windows.Forms.DockStyle.Fill;

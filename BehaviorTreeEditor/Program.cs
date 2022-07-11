@@ -1,8 +1,8 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
+using BehaviorTreesEditor;
 using System;
 using System.Windows.Forms;
-using BehaviorTreesEditor;
 
 namespace BehaviorTreesExample
 {
@@ -14,8 +14,7 @@ namespace BehaviorTreesExample
 		[STAThread]
 		static void Main()
 		{
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
+			ApplicationConfiguration.Initialize();
 			Application.Run(new BTEditorForm());
 		}
 	}

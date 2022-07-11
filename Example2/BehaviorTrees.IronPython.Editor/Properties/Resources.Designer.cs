@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IronPythonEditor.Properties {
+namespace BehaviorTrees.IronPython.Editor.Properties {
     using System;
     
     

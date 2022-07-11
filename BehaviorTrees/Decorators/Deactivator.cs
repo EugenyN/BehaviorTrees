@@ -1,8 +1,5 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.Serialization;
 
 namespace BehaviorTrees
@@ -23,7 +20,8 @@ namespace BehaviorTrees
 		public ExecutingStatus Status
 		{
 			get { return _status; }
-			set {
+			set
+			{
 				_status = value;
 				Root.SendValueChanged(this);
 			}

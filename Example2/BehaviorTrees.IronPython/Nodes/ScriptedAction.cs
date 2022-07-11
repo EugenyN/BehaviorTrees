@@ -1,10 +1,7 @@
-// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
 using BehaviorTrees.Engine;
-using BehaviorTrees.IronPython;
-using BehaviorTrees.IronPython.Design;
 using System.ComponentModel;
-using System.Drawing.Design;
 using System.Runtime.Serialization;
 
 namespace BehaviorTrees.IronPython
@@ -23,11 +20,12 @@ namespace BehaviorTrees.IronPython
 		/// 
 		/// </summary>
 		[DataMember]
-		[Editor(typeof(ScriptUITypeEditor), typeof(UITypeEditor))]
+		[Editor("BehaviorTrees.IronPython.Editor.ScriptUITypeEditor, BehaviorTrees.IronPython.Editor",
+			"System.Drawing.Design.UITypeEditor, System.Drawing")]
 		public string Action
 		{
 			get { return _action; }
-			set 
+			set
 			{
 				if (_action == value)
 					return;

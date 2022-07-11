@@ -1,10 +1,4 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
-
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
-
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
 namespace BehaviorTrees.IronPython
 {
@@ -13,8 +7,8 @@ namespace BehaviorTrees.IronPython
 	/// </summary>
 	public class CachedFunction
 	{
-		FnDesc			_fnDesc;
-		object			_fn;
+		FnDesc _fnDesc;
+		object _fn;
 
 		public CachedFunction(FnDesc desc)
 		{
@@ -49,7 +43,8 @@ namespace BehaviorTrees.IronPython
 		{
 			var pi = PythonInterpreter.Instance;
 
-			if (_fn == null) {
+			if (_fn == null)
+			{
 				var function = CodeGenerator.GenerateFunction(_fnDesc);
 				pi.Execute(function);
 				_fn = pi.GetVariable(_fnDesc.Name);

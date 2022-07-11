@@ -1,10 +1,8 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using BehaviorTrees.Utils;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace BehaviorTrees.Engine
 {
@@ -18,7 +16,8 @@ namespace BehaviorTrees.Engine
 		protected Dictionary<Type, Component> Components
 		{
 			get { return _components; }
-			set {
+			set
+			{
 				_components = value;
 
 				if (_components != null)
@@ -30,7 +29,6 @@ namespace BehaviorTrees.Engine
 		}
 
 		public Entity()
-			: base()
 		{
 		}
 

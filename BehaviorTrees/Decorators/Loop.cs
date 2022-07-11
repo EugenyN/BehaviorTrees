@@ -1,8 +1,5 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.Serialization;
 
 namespace BehaviorTrees
@@ -24,7 +21,8 @@ namespace BehaviorTrees
 		public int Count
 		{
 			get { return _count; }
-			set {
+			set
+			{
 				_count = value;
 				Root.SendValueChanged(this);
 			}

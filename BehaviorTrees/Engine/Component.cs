@@ -1,12 +1,8 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
 using BehaviorTrees.Utils;
+using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace BehaviorTrees.Engine
 {
@@ -31,7 +27,8 @@ namespace BehaviorTrees.Engine
 		public Entity Owner
 		{
 			get { return _owner; }
-			set {
+			set
+			{
 				if (_owner == value)
 					return;
 
@@ -59,7 +56,8 @@ namespace BehaviorTrees.Engine
 		public bool IsActive
 		{
 			get { return _isActive; }
-			set {
+			set
+			{
 				if (value)
 					Activate();
 				else
@@ -108,11 +106,7 @@ namespace BehaviorTrees.Engine
 		/// <param name="name"></param>
 		public Component(string name)
 		{
-			if (string.IsNullOrEmpty(name))
-				Name = GetType().Name;
-			else
-				Name = name;
-
+			Name = string.IsNullOrEmpty(name) ? GetType().Name : name;
 			_isInitialized = false;
 		}
 

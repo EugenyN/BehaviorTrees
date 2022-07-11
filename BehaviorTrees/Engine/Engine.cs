@@ -1,10 +1,5 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using BehaviorTrees;
 using BehaviorTrees.Utils;
 
 namespace BehaviorTrees.Engine
@@ -15,7 +10,8 @@ namespace BehaviorTrees.Engine
 
 		public static Engine Instance
 		{
-			get {
+			get
+			{
 				if (_instance == null)
 					_instance = new Engine();
 				return _instance;
@@ -25,12 +21,12 @@ namespace BehaviorTrees.Engine
 		private Engine()
 		{ }
 
-		public Action<object, EventArgs>	SceneLoaded { get; set; }
-		public Action<Node, EventArgs>		ExecutionCompleted { get; set; }
+		public Action<object, EventArgs> SceneLoaded { get; set; }
+		public Action<Node, EventArgs> ExecutionCompleted { get; set; }
 
-		public bool							IsDesignMode { get; internal set; }
-		public List<Entity>					Entities { get; set; } = new List<Entity>();
-		public BTScript						BTScript { get; set; }
+		public bool IsDesignMode { get; internal set; }
+		public List<Entity> Entities { get; set; } = new List<Entity>();
+		public BTScript BTScript { get; set; }
 
 		Node _currentTree;
 		CancellationTokenSource _executionToken;

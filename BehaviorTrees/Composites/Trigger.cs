@@ -1,7 +1,6 @@
-// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
 using BehaviorTrees.Engine;
-using System;
 using System.Runtime.Serialization;
 
 namespace BehaviorTrees
@@ -21,7 +20,8 @@ namespace BehaviorTrees
 		public BaseEvent Event
 		{
 			get { return _event; }
-			set {
+			set
+			{
 				if (_event == value)
 					return;
 
@@ -75,14 +75,14 @@ namespace BehaviorTrees
 		protected override void OnActivated()
 		{
 			base.OnActivated();
-			_em.EventTriggered += new EventHandler<BaseEventArgs>(EventRaised);
+			_em.EventTriggered += EventRaised;
 			_success = false;
 		}
 
 		protected override void OnDeactivated()
 		{
 			base.OnDeactivated();
-			_em.EventTriggered -= new EventHandler<BaseEventArgs>(EventRaised);
+			_em.EventTriggered -= EventRaised;
 		}
 
 		private void EventRaised(object sender, BaseEventArgs e)

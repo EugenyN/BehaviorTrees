@@ -8,29 +8,25 @@ A simple C# example of Behavior Trees + Editor.
 
 <img align="right" src="/Images/bt.png">
 
-They have been widely used in robotics and gaming since mid 2000, in particular, such game engines as Unreal, Unity, CryEngine use BT. BT have several advantages over [FSM](https://en.wikipedia.org/wiki/Finite-state_machine), such as *Maintainability* (nodes (or subtrees) can be designed independent from each other and can be independent changed), *Scalability* (complex BT can be decomposed into small sub-trees), *Reusability* (subtrees can be used as independent nodes)
-
-You can learn more about Behavior Trees at the following links:
+They have been widely used in robotics and gaming since mid 2000, in particular, such game engines as Unreal, Unity, CryEngine use BT. You can learn more about Behavior Trees at the following links:
 
 * [Behavior tree (Wikipedia)](https://en.wikipedia.org/wiki/Behavior_tree_(artificial_intelligence,_robotics_and_control))
-* [Behavior trees for AI: How they work (Gamasutra)](http://www.gamasutra.com/blogs/ChrisSimpson/20140717/221339/Behavior_trees_for_AI_How_they_work.php)
-* [Understanding Behavior Trees](http://aigamedev.com/open/articles/bt-overview/)
-* [Behavior Trees for Next-Gen Game AI (Video)](http://aigamedev.com/insider/presentation/behavior-trees/)
-
+* [Designing AI Agents’ Behaviors with Behavior Trees](https://towardsdatascience.com/designing-ai-agents-behaviors-with-behavior-trees-b28aa1c3cf8a)
+* [The Behavior Tree Starter Kit (A. Champandard and P. Dunstan)](https://www.gameaipro.com/GameAIPro/GameAIPro_Chapter06_The_Behavior_Tree_Starter_Kit.pdf)
 
 ## About project
 
 This project demonstrates the concept and working principle of the Behavior Trees. Therefore, I tried to make it as simple and laconic as possible. You can fork, adapt and extend the project to suit your needs.
 
-* The project includes **BehaviorTrees** library (C#, .Net Standard) with the main types of nodes: actions, conditions, composites and decorators (20 in total) as well as auxiliary classes. You can add your nodes by inheriting from existing ones. You can use `ActionBase` base class to create custom actions and use `BaseEvent` base class to create custom events. Trees can be serialized in json.
+* The project includes **BehaviorTrees** library with the main types of nodes: actions, conditions, composites and decorators (20 in total) as well as auxiliary classes. You can add your nodes by inheriting from existing ones. You can use `ActionBase` base class to create custom actions and use `BaseEvent` base class to create custom events. Trees can be serialized in json.
 
-* **BehaviorTreesEditor** (.Net Framework WinForms) allows you to edit trees with a simple TreeList control, to save, to load and to run trees.
+* **BehaviorTreesEditor** allows you to edit trees with a simple TreeList control, to save, to load and to run trees.
 
 ![Behavior Trees](/Images/editor.png "Editor")
 
 ## Example 1
 
-* **BehaviorTrees.Example1** (.Net Standard) contains simple example of the Behavior Tree with custom node `Move`:
+* **BehaviorTrees.Example1** contains simple example of the Behavior Tree with custom node `Move`:
 
 ```C#
 [DataContract]
@@ -94,18 +90,16 @@ var exampleBT = new TreeBuilder<Node>(new Sequence())
 
 ## Example 2 - IronPython nodes
 
-The library **BehaviorTrees.IronPython** is an example of scripting language integration into the Behavior Tree. As an example, two nodes are added: `ScriptedAction` and `ScriptedCondition`. The script can be edited both with help of the PropertyGrid and using the special editor implemented in **IronPythonEditor** project.
+The library **BehaviorTrees.IronPython** is an example of scripting language integration into the Behavior Tree. As an example two nodes are added: `ScriptedAction` and `ScriptedCondition`. The script can be edited both with help of the PropertyGrid and using the syntax highlighting editor implemented in **BehaviorTrees.IronPython.Editor** project.
 
 ![Behavior Trees](/Images/ipeditor.png "IronPython nodes")
 
 You can extend the example and add your own API, import your types, both from the host application and from other IronPython scripts. Based on this example you can integrate another scripting language you need.
 
-## Other BT implementations on the Github: ##
+## Build
 
-* [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP) (C++)
-* [Fluent Behavior Tree](https://github.com/aequasi/fluent-behavior-tree) (Typescript)
-* [Go Behave](https://github.com/askft/go-behave) (Go)
-* [Fluid Behavior Tree](https://github.com/ashblue/fluid-behavior-tree) (Unity, C#)
+* `net6.0` TFM is used for libraries and `net6.0-windows` for editors.
+* Please rebuild the solution to execute post-build scripts that will copy the example libraries to the output directory.
 
 ## Third party in this project
 
@@ -114,6 +108,13 @@ You can extend the example and add your own API, import your types, both from th
 * Visual Studio 2015 Image Library. [Microsoft Software License Terms](http://download.microsoft.com/download/0/6/0/0607D8EA-9BB7-440B-A36A-A24EB8C9C67E/Visual%20Studio%202015%20Image%20Library%20EULA.docx)
 * [IronPython](https://github.com/IronLanguages/ironpython2/) and [FastColoredTextBox](https://github.com/PavelTorgashov/FastColoredTextBox) in Example 2
 
+## Other Behavior Trees on Github
+
+* [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP) (C++)
+* [BehaviorTree.js](https://github.com/Calamari/BehaviorTree.js) (JavaScript)
+* [EntitiesBT](https://github.com/quabug/EntitiesBT) (Unity, DOTS)
+* [Fluid Behavior Tree](https://github.com/ashblue/fluid-behavior-tree) (Unity)
+
 ## License
 
-Copyright (c) 2015-2019 Eugeny Novikov. Code under MIT license.
+Copyright (c) 2015 Eugeny Novikov. Code under MIT license.

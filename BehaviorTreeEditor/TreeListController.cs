@@ -1,9 +1,8 @@
-// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
+using BehaviorTrees.Collections;
 using System;
 using System.Collections.Generic;
-using BehaviorTrees.Collections;
-
 using CT = CommonTools;
 
 namespace BehaviorTreesEditor
@@ -13,7 +12,7 @@ namespace BehaviorTreesEditor
 	/// </summary>
 	internal class TreeNodeCompare<T> : IComparer<T> where T : TreeNode<T>
 	{
-		IComparer<T> _valueCompare;
+		readonly IComparer<T> _valueCompare;
 
 		public TreeNodeCompare(IComparer<T> valueCompare)
 		{
@@ -65,8 +64,7 @@ namespace BehaviorTreesEditor
 
 		IComparer<T> _valueCompare;      // supplied by caller: compares node values
 		IComparer<T> _nodeCompare;       // helper object: compares T<T>'s
-
-
+		
 		public T Data
 		{
 			get { return _data; }
@@ -75,7 +73,8 @@ namespace BehaviorTreesEditor
 		public IComparer<T> AutoSortCompare
 		{
 			get { return _valueCompare; }
-			set {
+			set
+			{
 				if (_valueCompare == value) // avoid updating all items
 					return;
 
@@ -89,7 +88,8 @@ namespace BehaviorTreesEditor
 		public T SelectedNode
 		{
 			get { return GetDataNode(_treeList.FocusedNode); }
-			set {
+			set
+			{
 				var node = GetViewNode(value);
 				if (node != null)
 					_treeList.FocusedNode = node;
@@ -110,19 +110,19 @@ namespace BehaviorTreesEditor
 		{
 			_treeList = view;
 			_data = data;
-			_nodeMapper = nodeMapper != null ? nodeMapper : new TreeLisNodeDefaultMapper<T>();
+			_nodeMapper = nodeMapper ?? new TreeLisNodeDefaultMapper<T>();
 
 			UpdateAllNodes();
 
-			_data.Root.NodeChanged += new EventHandler<TreeEventArgs<T>>(NodeChanged);
-			_data.Root.ValueChanged += new EventHandler<TreeEventArgs<T>>(ValueChanged);
+			_data.Root.NodeChanged += NodeChanged;
+			_data.Root.ValueChanged += ValueChanged;
 		}
 
 		public T GetDataNode(CT.Node viewNode)
 		{
 			if (viewNode == null)
 				return null;
-			return _nodeMapper.GetNodeInfo(viewNode) as T;
+			return _nodeMapper.GetNodeInfo(viewNode);
 		}
 
 		public CT.Node GetViewNode(T dataNode)
@@ -235,8 +235,8 @@ namespace BehaviorTreesEditor
 			if (_data == null)
 				return;
 
-			_data.Root.NodeChanged -= new EventHandler<TreeEventArgs<T>>(NodeChanged);
-			_data.Root.ValueChanged -= new EventHandler<TreeEventArgs<T>>(ValueChanged);
+			_data.Root.NodeChanged -= NodeChanged;
+			_data.Root.ValueChanged -= ValueChanged;
 		}
 	}
 }

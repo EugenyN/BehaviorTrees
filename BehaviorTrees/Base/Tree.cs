@@ -1,11 +1,8 @@
 // https://www.codeproject.com/Articles/12592/Generic-Tree-T-in-C
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.Serialization;
-using System.Collections.ObjectModel;
 using System.Collections;
+using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
 
 namespace BehaviorTrees.Collections
 {
@@ -196,7 +193,8 @@ namespace BehaviorTrees.Collections
 		[Browsable(false)]
 		public TreeNodeCollection<T> Nodes
 		{
-			get {
+			get
+			{
 				if (_nodes == null)
 					_nodes = new TreeNodeCollection<T>(this);
 				return _nodes;
@@ -243,7 +241,8 @@ namespace BehaviorTrees.Collections
 		[Browsable(false)]
 		public int Depth
 		{
-			get {
+			get
+			{
 				int depth = 0;
 				T node = _parent;
 				while (node != null)
@@ -432,7 +431,7 @@ namespace BehaviorTrees.Collections
 	[CollectionDataContract(ItemName = "Node")]
 	public class TreeNodeCollection<T> : Collection<T> where T : TreeNode<T>
 	{
-		private T _owner = null;
+		private readonly T _owner = null;
 
 		/// <summary>
 		/// The Node to which this collection belongs (this==Owner.Childs). 
@@ -451,9 +450,7 @@ namespace BehaviorTrees.Collections
 		/// <param name="owner"></param>
 		internal TreeNodeCollection(TreeNode<T> owner)
 		{
-			if (owner == null)
-				throw new ArgumentNullException("owner");
-			_owner = (T)owner;
+			_owner = (T)owner ?? throw new ArgumentNullException(nameof(owner));
 		}
 
 		/// <summary>
@@ -615,7 +612,7 @@ namespace BehaviorTrees.Collections
 		public new IEnumerator<T> GetEnumerator()
 		{
 			foreach (var item in Items)
-				yield return (T)item;
+				yield return item;
 		}
 	}
 }

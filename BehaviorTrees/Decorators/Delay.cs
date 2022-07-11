@@ -1,8 +1,5 @@
-// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.Serialization;
 
 namespace BehaviorTrees
@@ -25,7 +22,8 @@ namespace BehaviorTrees
 		public float Seconds
 		{
 			get { return _seconds; }
-			set {
+			set
+			{
 				_seconds = value;
 				Root.SendValueChanged(this);
 			}

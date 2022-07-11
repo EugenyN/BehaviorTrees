@@ -1,10 +1,9 @@
-// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
 using BehaviorTrees.Collections;
 using BehaviorTrees.Engine;
-using BehaviorTrees.Utils;
-using System;
 using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.Serialization;
 
 namespace BehaviorTrees
@@ -34,7 +33,8 @@ namespace BehaviorTrees
 		public bool IsActive
 		{
 			get { return _isActive; }
-			set {
+			set
+			{
 				if (_isActive == value)
 					return;
 
@@ -55,7 +55,8 @@ namespace BehaviorTrees
 		public Entity Owner
 		{
 			get { return _owner; }
-			set {
+			set
+			{
 				if (_owner == value)
 					return;
 
@@ -79,7 +80,8 @@ namespace BehaviorTrees
 		public IScriptedContext ScriptedContext
 		{
 			get { return _scriptedContext; }
-			set {
+			set
+			{
 				if (_scriptedContext != value)
 				{
 					_scriptedContext = value;
@@ -107,24 +109,6 @@ namespace BehaviorTrees
 		public virtual string NodeParameters
 		{
 			get { return ""; }
-		}
-
-		[Browsable(false)]
-		public virtual int ImageListIndex
-		{
-			get {
-				if (NodeType == "Action")
-					return 0;
-				if (NodeType == "Composite")
-					return 1;
-				if (NodeType == "Condition")
-					return 2;
-				if (NodeType == "Decorator")
-					return 3;
-				if (NodeType == "Trigger")
-					return 4;
-				return 0;
-			}
 		}
 
 		/// <summary>
@@ -263,7 +247,7 @@ namespace BehaviorTrees
 		/// <returns></returns>
 		public static string GetName(Type type)
 		{
-			var attr = Reflector.GetAttribute<BTNodeAttribute>(type);
+			var attr = type.GetCustomAttribute<BTNodeAttribute>();
 			return attr != null ? attr.Name : type.Name;
 		}
 
@@ -274,7 +258,7 @@ namespace BehaviorTrees
 		/// <returns></returns>
 		public static string GetType(Type type)
 		{
-			var attr = Reflector.GetAttribute<BTNodeAttribute>(type);
+			var attr = type.GetCustomAttribute<BTNodeAttribute>();
 			return attr != null ? attr.Type : "Node";
 		}
 

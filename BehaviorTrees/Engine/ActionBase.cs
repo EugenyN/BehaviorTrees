@@ -1,7 +1,7 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System.Runtime.Serialization;
 using System.Diagnostics;
+using System.Runtime.Serialization;
 
 namespace BehaviorTrees.Engine
 {
@@ -19,7 +19,8 @@ namespace BehaviorTrees.Engine
 		public IScriptedContext ScriptedContext
 		{
 			get { return _scriptedContext; }
-			set {
+			set
+			{
 				if (_scriptedContext != value)
 				{
 					_scriptedContext = value;

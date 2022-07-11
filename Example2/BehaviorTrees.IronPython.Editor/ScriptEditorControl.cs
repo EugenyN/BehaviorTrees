@@ -1,14 +1,14 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using BehaviorTrees.IronPython;
 using FastColoredTextBoxNS;
+using FastColoredTextBoxNS.Types;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace IronPythonEditor
+namespace BehaviorTrees.IronPython.Editor
 {
 	public partial class ScriptEditorControl : UserControl
 	{
@@ -121,7 +121,7 @@ namespace IronPythonEditor
 				return pythonTextbox.Text;
 		}
 
-		private void HighlightingSetup(Range range)
+		private void HighlightingSetup(TextSelectionRange range)
 		{
 			range.ClearStyle(BlueStyle, BoldStyle, GrayStyle, MagentaStyle, GreenStyle, BrownStyle, OrangeStyle);
 
@@ -140,14 +140,14 @@ namespace IronPythonEditor
 			range.SetFoldingMarkers("\"\"\"", "\"\"\"", RegexOptions.Singleline | RegexOptions.RightToLeft);
 		}
 
-		private void PythonTextbox_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
+		private void PythonTextbox_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			pythonTextbox.LeftBracket = '(';
 			pythonTextbox.RightBracket = ')';
 			pythonTextbox.LeftBracket2 = '\x0';
 			pythonTextbox.RightBracket2 = '\x0';
 
-			Range range = (sender as FastColoredTextBox).Range;
+			var range = (sender as FastColoredTextBox).Range;
 			if (range != null)
 				HighlightingSetup(range);
 		}

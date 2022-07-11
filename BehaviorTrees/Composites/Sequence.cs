@@ -1,8 +1,5 @@
-// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.Serialization;
 
 
@@ -82,11 +79,13 @@ namespace BehaviorTrees
 				case ExecutingStatus.Success:
 					_currentStep++;
 					_currentNode = null;
-					if (_currentStep >= Nodes.Count) {
+					if (_currentStep >= Nodes.Count)
+					{
 						_currentStep = 0;
 						return ExecutingStatus.Success;
 					}
-					else {
+					else
+					{
 						return ExecutingStatus.Running;
 					}
 				case ExecutingStatus.Running:

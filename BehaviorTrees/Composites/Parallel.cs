@@ -1,9 +1,5 @@
-// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 
 namespace BehaviorTrees
@@ -77,12 +73,15 @@ namespace BehaviorTrees
 				if (status == ExecutingStatus.Failure)
 					return ExecutingStatus.Failure;
 
-				if (status == ExecutingStatus.Success) {
-					if (_successPolicy == SuccessPolicy.One) {
+				if (status == ExecutingStatus.Success)
+				{
+					if (_successPolicy == SuccessPolicy.One)
+					{
 						return ExecutingStatus.Success;
 					}
 
-					if (_successPolicy == SuccessPolicy.First) {
+					if (_successPolicy == SuccessPolicy.First)
+					{
 						if (node == Nodes[0])
 							return ExecutingStatus.Success;
 					}
@@ -92,7 +91,8 @@ namespace BehaviorTrees
 					allSuccess = false;
 			}
 
-			if (_successPolicy == SuccessPolicy.All) {
+			if (_successPolicy == SuccessPolicy.All)
+			{
 				if (allSuccess)
 					return ExecutingStatus.Success;
 			}

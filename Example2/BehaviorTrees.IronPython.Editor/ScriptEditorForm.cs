@@ -1,10 +1,9 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using BehaviorTrees.IronPython;
 using System;
 using System.Windows.Forms;
 
-namespace IronPythonEditor
+namespace BehaviorTrees.IronPython.Editor
 {
 	public partial class ScriptEditorForm : Form
 	{

@@ -1,11 +1,9 @@
-﻿// Copyright(c) 2015-2019 Eugeny Novikov. Code under MIT license.
+﻿// Copyright(c) 2015 Eugeny Novikov. Code under MIT license.
 
-using System;
+using BehaviorTrees;
+using BehaviorTrees.Engine;
 using System.IO;
 using System.Windows.Forms;
-using BehaviorTrees;
-using BehaviorTrees.Collections;
-using BehaviorTrees.Engine;
 
 namespace BehaviorTreesEditor
 {
