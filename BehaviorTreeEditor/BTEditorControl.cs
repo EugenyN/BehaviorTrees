@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace BehaviorTreesEditor
 {
@@ -30,6 +31,7 @@ namespace BehaviorTreesEditor
 		TreeListController<Node> _controller;
 		readonly List<Type> _nodeTypes;
 
+		[DefaultValue(null)]
 		public BTScript Script
 		{
 			get { return _script; }

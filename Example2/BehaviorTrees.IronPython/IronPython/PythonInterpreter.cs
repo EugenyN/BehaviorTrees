@@ -33,7 +33,6 @@ namespace BehaviorTrees.IronPython
 		readonly ObjectOperations _operations;
 		Scope _defaultScope;
 		MemoryStream _output;
-		ASCIIEncoding _textEncoder;
 
 		public ScriptEngine Engine
 		{
@@ -62,9 +61,7 @@ namespace BehaviorTrees.IronPython
 			_engine = CreateEngine();
 			//TODO: add custom search path for .py files
 			//_engine.SetSearchPaths(new string[] { ScriptsPath });
-
-			SetupOutput();
-
+			
 			_defaultScope = new Scope(_engine.CreateScope(), this);
 			_operations = _defaultScope.CreateOperations();
 		}
@@ -87,12 +84,17 @@ namespace BehaviorTrees.IronPython
 			Log.Write("Interpreter initialization completed.");
 		}
 
-		private static ScriptEngine CreateEngine()
+		private ScriptEngine CreateEngine()
 		{
 			var setup = new ScriptRuntimeSetup();
 			setup.LanguageSetups.Add(Python.CreateLanguageSetup(null));
 			setup.DebugMode = true;
 			var runtime = new ScriptRuntime(setup);
+			
+			_output = new MemoryStream();
+			runtime.IO.SetOutput(_output, Encoding.Unicode);
+			//runtime.IO.SetErrorOutput(_output, Encoding.Unicode);
+			
 			return runtime.GetEngine("py");
 		}
 
@@ -198,31 +200,14 @@ namespace BehaviorTrees.IronPython
 		{
 			_defaultScope.RemoveVariable(name);
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		private void SetupOutput()
-		{
-			_output = new MemoryStream();
-			_textEncoder = new ASCIIEncoding();
-			_engine.Runtime.IO.SetOutput(_output, _engine.Runtime.IO.InputEncoding);
-			//_engine.Runtime.IO.SetErrorOutput(_output, _engine.Runtime.IO.InputEncoding);
-		}
-
+		
 		/// <summary>
 		/// Get string output from IronPythons MemoryStream standard out
 		/// </summary>
 		/// <returns></returns>
 		public string GetOutput()
 		{
-			byte[] statementOutput = new byte[_output.Length];
-			_output.Position = 0;
-			_output.Read(statementOutput, 0, (int)_output.Length);
-			_output.Position = 0;
-			_output.SetLength(0);
-
-			return _textEncoder.GetString(statementOutput);
+			return Encoding.Unicode.GetString(_output.ToArray());
 		}
 
 		/// <summary>

@@ -15,53 +15,53 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BTEditorForm));
-            this.scriptEditorControl = new BehaviorTreesEditor.BTEditorControl();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStrip1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // scriptEditorControl
-            // 
-            this.scriptEditorControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scriptEditorControl.Location = new System.Drawing.Point(0, 0);
-            this.scriptEditorControl.Name = "scriptEditorControl";
-            this.scriptEditorControl.Script = null;
-            this.scriptEditorControl.Size = new System.Drawing.Size(745, 502);
-            this.scriptEditorControl.TabIndex = 0;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 502);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(745, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // statusLabel
-            // 
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(66, 17);
-            this.statusLabel.Text = "statusLabel";
-            // 
-            // BTEditorForm
-            // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(745, 524);
-            this.Controls.Add(this.scriptEditorControl);
-            this.Controls.Add(this.statusStrip1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.KeyPreview = true;
-            this.Name = "BTEditorForm";
-            this.Text = "Behavior Tree Editor";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BTEditorForm_KeyDown);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BTEditorForm));
+			scriptEditorControl = new BTEditorControl();
+			statusStrip1 = new System.Windows.Forms.StatusStrip();
+			statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+			statusStrip1.SuspendLayout();
+			SuspendLayout();
+			// 
+			// scriptEditorControl
+			// 
+			scriptEditorControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			scriptEditorControl.Location = new System.Drawing.Point(0, 0);
+			scriptEditorControl.Name = "scriptEditorControl";
+			scriptEditorControl.Size = new System.Drawing.Size(819, 502);
+			scriptEditorControl.TabIndex = 0;
+			// 
+			// statusStrip1
+			// 
+			statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { statusLabel });
+			statusStrip1.Location = new System.Drawing.Point(0, 502);
+			statusStrip1.Name = "statusStrip1";
+			statusStrip1.Size = new System.Drawing.Size(819, 22);
+			statusStrip1.TabIndex = 1;
+			statusStrip1.Text = "statusStrip1";
+			// 
+			// statusLabel
+			// 
+			statusLabel.Name = "statusLabel";
+			statusLabel.Size = new System.Drawing.Size(66, 17);
+			statusLabel.Text = "statusLabel";
+			// 
+			// BTEditorForm
+			// 
+			AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			ClientSize = new System.Drawing.Size(819, 524);
+			Controls.Add(scriptEditorControl);
+			Controls.Add(statusStrip1);
+			Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+			KeyPreview = true;
+			Name = "BTEditorForm";
+			StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			Text = "Behavior Tree Editor";
+			KeyDown += BTEditorForm_KeyDown;
+			statusStrip1.ResumeLayout(false);
+			statusStrip1.PerformLayout();
+			ResumeLayout(false);
+			PerformLayout();
 
 		}
 

@@ -1,13 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Design;
-using System.Windows.Forms;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
-using System.Windows.Forms.VisualStyles;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace CommonTools
 {
@@ -53,6 +47,7 @@ namespace CommonTools
 		TreeListColumnCollection	m_columns;
 		TreeList.RowSetting			m_rowSetting;
 		TreeList.ViewSetting		m_viewSetting;
+		float m_dpiScale = 1.0f;
 
 		[Category("Columns")]
 		[Browsable(true)]
@@ -77,7 +72,7 @@ namespace CommonTools
 		{
 			get { return m_rowSetting; }
 		}
-		
+
 		[Category("Options")]
 		[Browsable(true)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -100,6 +95,8 @@ namespace CommonTools
 			get { return base.BackColor; }
 			set { base.BackColor = value; }
 		}
+
+		[DefaultValue(null)]
 		public ImageList Images
 		{
 			get { return m_images; }
@@ -111,6 +108,7 @@ namespace CommonTools
 		{
 			get { return m_nodes; }
 		}
+
 		public TreeListView()
 		{
 			this.DoubleBuffered = true;
@@ -125,7 +123,16 @@ namespace CommonTools
 			m_rowSetting = new TreeList.RowSetting(this);
 			m_viewSetting = new TreeList.ViewSetting(this);
 			AddScroolBars();
+
+			using (Graphics g = CreateGraphics())
+				m_dpiScale = g.DpiX / 96f;
 		}
+
+		public int DpiScale(float value)
+		{
+			return (int)(value * m_dpiScale);
+		}
+
 		public void RecalcLayout()
 		{
 			if (m_firstVisibleNode == null)
@@ -184,6 +191,7 @@ namespace CommonTools
 		RowPainter m_rowPainter;
 		CellPainter m_cellPainter;
 		[Browsable(false)]
+		[DefaultValue(null)]
 		public CellPainter CellPainter
 		{
 			get { return m_cellPainter; }
@@ -201,7 +209,7 @@ namespace CommonTools
 			get { return m_nodesSelection; }
 		}
 		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[DefaultValue(null)]
 		public Node FocusedNode
 		{
 			get { return m_focusedNode; }
@@ -368,21 +376,21 @@ namespace CommonTools
 		int m_hotrow = -1;
 		int CalcHitRow(Point mousepoint)
 		{
-			if (mousepoint.Y <= Columns.Options.HeaderHeight)
+			if (mousepoint.Y <= DpiScale(Columns.Options.HeaderHeight))
 				return -1;
-			return (mousepoint.Y - Columns.Options.HeaderHeight) / RowOptions.ItemHeight;
+			return (mousepoint.Y - DpiScale(Columns.Options.HeaderHeight)) / DpiScale(RowOptions.ItemHeight);
 		}
 		int VisibleRowToYPoint(int visibleRowIndex)
 		{
-			return Columns.Options.HeaderHeight + (visibleRowIndex * RowOptions.ItemHeight);
+			return DpiScale(Columns.Options.HeaderHeight) + (visibleRowIndex * DpiScale(RowOptions.ItemHeight));
 		}
 		Rectangle CalcRowRecangle(int visibleRowIndex)
 		{
 			Rectangle r = ClientRectangle;
 			r.Y = VisibleRowToYPoint(visibleRowIndex);
-			if (r.Top < Columns.Options.HeaderHeight || r.Top > ClientRectangle.Height)
+			if (r.Top < DpiScale(Columns.Options.HeaderHeight) || r.Top > ClientRectangle.Height)
 				return Rectangle.Empty;
-			r.Height = RowOptions.ItemHeight;
+			r.Height = DpiScale(RowOptions.ItemHeight);
 			return r;
 		}
 
@@ -490,7 +498,7 @@ namespace CommonTools
 			int newhotrow = -1;
 			if (hotcol == null)
 			{
-				int row = (e.Y - Columns.Options.HeaderHeight) / RowOptions.ItemHeight;
+				int row = (e.Y - DpiScale(Columns.Options.HeaderHeight)) / DpiScale(RowOptions.ItemHeight);
 				newhotrow = row + vScrollOffset;
 			}
 			if (newhotrow != m_hotrow)
@@ -607,22 +615,22 @@ namespace CommonTools
 		internal int RowHeaderWidth()
 		{
 			if (RowOptions.ShowHeader)
-				return RowOptions.HeaderWidth;
+				return DpiScale(RowOptions.HeaderWidth);
 			return 0;
 		}
 		int MinWidth()
 		{
-			return RowHeaderWidth() + Columns.ColumnsWidth;
+			return RowHeaderWidth() + DpiScale(Columns.ColumnsWidth);
 		}
 		int MaxVisibleRows(out int remainder)
 		{
 			remainder = 0;
 			if (ClientRectangle.Height < 0)
 				return 0;
-			int height = ClientRectangle.Height - Columns.Options.HeaderHeight;
+			int height = ClientRectangle.Height - DpiScale(Columns.Options.HeaderHeight);
 			//return (int) Math.Ceiling((double)(ClientRectangle.Height - Columns.HeaderHeight) / (double)Nodes.ItemHeight); 
-			remainder = (ClientRectangle.Height - Columns.Options.HeaderHeight) % RowOptions.ItemHeight ;
-			return (ClientRectangle.Height - Columns.Options.HeaderHeight) / RowOptions.ItemHeight ;
+			remainder = (ClientRectangle.Height - DpiScale(Columns.Options.HeaderHeight)) % DpiScale(RowOptions.ItemHeight) ;
+			return (ClientRectangle.Height - DpiScale(Columns.Options.HeaderHeight)) / DpiScale(RowOptions.ItemHeight) ;
 		}
 		int MaxVisibleRows()
 		{
@@ -705,7 +713,7 @@ namespace CommonTools
 		protected virtual void PaintImage(Graphics dc, Rectangle imageRect, Node node, Image image)
 		{
 			if (image != null)
-				dc.DrawImageUnscaled(image, imageRect);
+				dc.DrawImage(image, imageRect);
 		}
 		protected virtual void PaintNode(Graphics dc, Rectangle rowRect, Node node, TreeListColumn[] visibleColumns, int visibleRowIndex)
 		{
@@ -721,13 +729,13 @@ namespace CommonTools
 
 				if (col.VisibleIndex == 0)
 				{
-					int lineindet = 10;
+					int lineindet = DpiScale(10);
 					// add left margin
-					cellRect.X += Columns.Options.LeftMargin;
-					cellRect.Width -= Columns.Options.LeftMargin;
+					cellRect.X += DpiScale(Columns.Options.LeftMargin);
+					cellRect.Width -= DpiScale(Columns.Options.LeftMargin);
 
 					// add indent size
-					int indentSize = GetIndentSize(node) + 5;
+					int indentSize = GetIndentSize(node) + DpiScale(5);
 					cellRect.X += indentSize;
 					cellRect.Width -= indentSize;
 					if (ViewOptions.ShowLine)
@@ -741,18 +749,18 @@ namespace CommonTools
 
 					if (!ViewOptions.ShowLine && !ViewOptions.ShowPlusMinus)
 					{
-						cellRect.X -= (lineindet + 5);
-						cellRect.Width += (lineindet + 5);
+						cellRect.X -= (lineindet + DpiScale(5));
+						cellRect.Width += (lineindet + DpiScale(5));
 					}
 
 					Image icon = GetNodeBitmap(node);
 					if (icon != null)
 					{
 						// center the image vertically
-						glyphRect.Y = cellRect.Y + (cellRect.Height / 2) - (icon.Height / 2);
+						glyphRect.Y = cellRect.Y + (cellRect.Height / 2) - (DpiScale(icon.Height) / 2);
 						glyphRect.X = cellRect.X;
-						glyphRect.Width = icon.Width;
-						glyphRect.Height = icon.Height;
+						glyphRect.Width = DpiScale(icon.Width);
+						glyphRect.Height = DpiScale(icon.Height);
 
 
 						PaintImage(dc, glyphRect, node, icon);
@@ -789,7 +797,7 @@ namespace CommonTools
 			Node parent = node.Parent;
 			while (parent != null)
 			{
-				cellRect.X -= ViewOptions.Indent;
+				cellRect.X -= DpiScale(ViewOptions.Indent);
 				if (parent.NextSibling != null)
 					dc.DrawLine(pen, cellRect.X, cellRect.Top, cellRect.X, cellRect.Bottom);
 				parent = parent.Parent;
@@ -803,7 +811,7 @@ namespace CommonTools
 			Node parent = node.Parent;
 			while (parent != null)
 			{
-				indent += ViewOptions.Indent;
+				indent += DpiScale(ViewOptions.Indent);
 				parent = parent.Parent;
 			}
 			return indent;
@@ -820,10 +828,10 @@ namespace CommonTools
 			Rectangle glyphRect = firstColumn.CalculatedRect;
 			glyphRect.X -= hScrollOffset;
 			glyphRect.X += GetIndentSize(node);
-			glyphRect.X += Columns.Options.LeftMargin;
-			glyphRect.Width = 10;
-			glyphRect.Y = VisibleRowToYPoint(visibleRowIndex);
-			glyphRect.Height = RowOptions.ItemHeight;
+			glyphRect.X += DpiScale(Columns.Options.LeftMargin);
+			glyphRect.Width = DpiScale(10);
+			glyphRect.Y = VisibleRowToYPoint(visibleRowIndex) + DpiScale(RowOptions.ItemHeight - 10) / 2;
+			glyphRect.Height = DpiScale(10);
 			return glyphRect;
 		}
 		protected virtual Image GetNodeBitmap(Node node)
@@ -859,14 +867,14 @@ namespace CommonTools
 	
 				Rectangle fullRect = ClientRectangle;
 				if (drawColumnHeaders)
-					fullRect.Y += Columns.Options.HeaderHeight;
-				fullRect.Height = visiblerows * RowOptions.ItemHeight;
+					fullRect.Y += DpiScale(Columns.Options.HeaderHeight);
+				fullRect.Height = visiblerows * DpiScale(RowOptions.ItemHeight);
 				Columns.Painter.DrawVerticalGridLines(Columns, e.Graphics, fullRect, hScrollOffset);
 			}
 
 			int visibleRowIndex = 0;
 			TreeListColumn[] visibleColumns = this.Columns.VisibleColumns;
-			int columnsWidth = Columns.ColumnsWidth;
+			int columnsWidth = DpiScale(Columns.ColumnsWidth);
 			foreach (Node node in NodeCollection.ForwardNodeIterator(m_firstVisibleNode, true))
 			{
 				Rectangle rowRect = CalcRowRecangle(visibleRowIndex);

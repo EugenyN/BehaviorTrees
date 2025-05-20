@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<TargetFramework>net6.0</TargetFramework>
+	<TargetFramework>net9.0</TargetFramework>
 	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
@@ -8,10 +8,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="IronPython">
-      <Version>2.7.12</Version>
+      <Version>3.4.2</Version>
     </PackageReference>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(SolutionDir)bin\$(Configuration)\net6.0-windows\&quot;&#xD;&#xA;xcopy /Y &quot;$(TargetDir)$(ProjectName).pdb&quot; &quot;$(SolutionDir)bin\$(Configuration)\net6.0-windows\&quot;" />
+    <Exec Command="xcopy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(SolutionDir)bin\$(Configuration)\net9.0-windows\&quot;&#xD;&#xA;xcopy /Y &quot;$(TargetDir)$(ProjectName).pdb&quot; &quot;$(SolutionDir)bin\$(Configuration)\net9.0-windows\&quot;" />
   </Target>
 </Project>

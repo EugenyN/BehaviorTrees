@@ -4,11 +4,13 @@ using BehaviorTrees;
 using BehaviorTrees.Engine;
 using System.IO;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace BehaviorTreesEditor
 {
 	public partial class BTEditorForm : Form
 	{
+		[DefaultValue(null)]
 		public BTScript Data
 		{
 			get { return scriptEditorControl.Script; }

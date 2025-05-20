@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace BehaviorTrees.IronPython.Editor
 {
@@ -39,6 +40,7 @@ namespace BehaviorTrees.IronPython.Editor
 			}
 		}
 
+		[DefaultValue(null)]
 		public PythonScript Script { get; set; }
 
 		public event EventHandler ScriptLoaded;

@@ -1,10 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+	<ForceDesignerDPIUnaware>true</ForceDesignerDPIUnaware>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="ScriptEditorControl.cs">
@@ -19,6 +21,6 @@
     <PackageReference Include="Dax-FCTB" Version="2.16.26.120" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	<Exec Command="xcopy /Y &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)bin\$(Configuration)\net6.0-windows\&quot;&#xD;&#xA;xcopy /Y &quot;$(TargetDir)*.pdb&quot; &quot;$(SolutionDir)bin\$(Configuration)\net6.0-windows\&quot;" />
+	<Exec Command="xcopy /Y &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)bin\$(Configuration)\net9.0-windows\&quot;&#xD;&#xA;xcopy /Y &quot;$(TargetDir)*.pdb&quot; &quot;$(SolutionDir)bin\$(Configuration)\net9.0-windows\&quot;" />
   </Target>
 </Project>

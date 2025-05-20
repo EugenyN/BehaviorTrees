@@ -3,7 +3,6 @@
 using BehaviorTrees.Engine;
 using BehaviorTrees.Utils;
 using IronPython.Runtime;
-using IronPython.Runtime.Types;
 using Microsoft.Scripting.Hosting;
 using System.Runtime.Serialization;
 
@@ -77,7 +76,7 @@ namespace BehaviorTrees.IronPython
 			var fn = _pi.GetVariable(desc.Name);
 			_pi.RemoveVariable(desc.Name);
 
-			var method = new Method(fn, _object, DynamicHelpers.GetPythonType(_object));
+			var method = new Method(fn, _object);
 			SetMember(desc.Name, method);
 			return method;
 		}

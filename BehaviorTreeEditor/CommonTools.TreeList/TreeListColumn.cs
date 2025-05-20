@@ -2,14 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using System.Diagnostics;
-
 using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design.Serialization;
-using System.Reflection;
-using System.Windows.Forms;
 
 namespace CommonTools
 {
@@ -81,14 +75,14 @@ namespace CommonTools
 		}
 
 		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[DefaultValue(null)]
 		public Rectangle CalculatedRect
 		{
 			get { return internalCalculatedRect; }
 		}
 
 		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[DefaultValue(null)]
 		public TreeListView TreeList
 		{
 			get 
@@ -99,7 +93,7 @@ namespace CommonTools
 			}
 		}
 		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[DefaultValue(null)]
 		public Font Font
 		{
 			get { return m_owner.Font; }
@@ -160,7 +154,7 @@ namespace CommonTools
 		}
 		
 		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[DefaultValue(-1)]
 		public int VisibleIndex
 		{
 			get { return internalVisibleIndex; }
@@ -172,7 +166,7 @@ namespace CommonTools
 		}
 		
 		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[DefaultValue(-1)]
 		public int Index
 		{
 			get { return internalIndex; }
@@ -307,7 +301,7 @@ namespace CommonTools
 		{
 			HitInfo info = new HitInfo();
 			info.Column = CalcHitColumn(point, horzOffset);
-			if ((info.Column != null) && (point.Y < Options.HeaderHeight))
+			if ((info.Column != null) && (point.Y < m_owner.DpiScale(Options.HeaderHeight)))
 			{
 				info.HitType |= HitInfo.eHitType.kColumnHeader;
 				int right = info.Column.CalculatedRect.Right - horzOffset;
@@ -321,7 +315,7 @@ namespace CommonTools
 		}
 		public TreeListColumn CalcHitColumn(Point point, int horzOffset)
 		{
-			if (point.X < Options.LeftMargin)
+			if (point.X < m_owner.DpiScale(Options.LeftMargin))
 				return null;
 			foreach (TreeListColumn col in m_visibleCols)
 			{
@@ -342,9 +336,9 @@ namespace CommonTools
 				return;
 			int x = 0;//m_leftMargin;
 			if (m_owner.RowOptions.ShowHeader)
-				x = m_owner.RowOptions.HeaderWidth;
+				x = m_owner.DpiScale(m_owner.RowOptions.HeaderWidth);
 			int y = 0;
-			int h = Options.HeaderHeight;
+			int h = m_owner.DpiScale(Options.HeaderHeight);
 			int index = 0;
 			foreach(TreeListColumn col in m_columns)
 			{
@@ -419,7 +413,7 @@ namespace CommonTools
 			// drwa row header filler
 			if (m_owner.RowOptions.ShowHeader)
 			{
-				Rectangle r = new Rectangle(0, 0, m_owner.RowOptions.HeaderWidth, Options.HeaderHeight);
+				Rectangle r = new Rectangle(0, 0, m_owner.DpiScale(m_owner.RowOptions.HeaderWidth), m_owner.DpiScale(Options.HeaderHeight));
 				m_painter.DrawHeaderFiller(dc, r);
 			}
 		}

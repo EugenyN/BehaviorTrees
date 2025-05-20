@@ -98,7 +98,7 @@ You can extend the example and add your own API, import your types, both from th
 
 ## Build
 
-* `net6.0` TFM is used for libraries and `net6.0-windows` for editors.
+* `net9.0` TFM is used for libraries and `net9.0-windows` for editors.
 * Please rebuild the solution to execute post-build scripts that will copy the example libraries to the output directory.
 
 ## Third party in this project
@@ -106,7 +106,7 @@ You can extend the example and add your own API, import your types, both from th
 * [TreeView with Columns](https://www.codeproject.com/Articles/23746/TreeView-with-Columns) by jkristia 
 * [Generic Tree container](https://www.codeproject.com/Articles/12592/Generic-Tree-T-in-C) by peterchen 
 * Visual Studio 2015 Image Library. [Microsoft Software License Terms](http://download.microsoft.com/download/0/6/0/0607D8EA-9BB7-440B-A36A-A24EB8C9C67E/Visual%20Studio%202015%20Image%20Library%20EULA.docx)
-* [IronPython](https://github.com/IronLanguages/ironpython2/) and [FastColoredTextBox](https://github.com/PavelTorgashov/FastColoredTextBox) in Example 2
+* [IronPython](https://github.com/IronLanguages/ironpython3/) and [FastColoredTextBox](https://github.com/PavelTorgashov/FastColoredTextBox) in Example 2
 
 ## Other Behavior Trees on Github
 
